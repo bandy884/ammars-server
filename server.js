@@ -44,7 +44,6 @@ app.use(express.static(__dirname + "/public"));
 app.use(urlencoded({extended: true}))
 app.use(express.json());
 
-
 /* PROFILE PICTURE UPLOADING FUNCTIONS */
 // Set Storage Engine
 const storage = multer.diskStorage({
@@ -127,7 +126,6 @@ app.post("/login", (req, res, next) => {
                         // we will just redirect the user to UHP and get their localStorage data
                         // validate it via our validation route and then give an error or the user data back via server and ejs tags
                         // and we will be good! also our EVERY request from the UHP will require both the username and the password so its secure
-                        // 
                         res.redirect("/UserHomePage");
                     } else {
                         res.render("login", {wrongPassword: `Invalid password, please try again!`});
