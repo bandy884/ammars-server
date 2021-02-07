@@ -14,7 +14,7 @@ const jwt = require("jsonwebtoken")
 // setting some required data
 const app = express();
 const PORT = process.env.PORT || 80;
-const DBURI = "mongodb+srv://bosdos12:112211@engineerschat.dkhym.mongodb.net/EngineersChatDB?retryWrites=true&w=majority";
+const DBURI = "";
 const jsonParser = bodyParser.json()
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
