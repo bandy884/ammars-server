@@ -1,5 +1,6 @@
 /**
- *  LICENSE: 
+ *  LICENSE: ALL RIGTHS RESERVED, USE IN ANY SORT OF WAYS ISNT PERMITED.
+ *  copyright(C), 2021, Adak Celina & Ammar Rexhaj.
  */
 // Module Imports
 require("dotenv").config();
