@@ -14,7 +14,7 @@ const jwt = require("jsonwebtoken")
 
 // setting some required data
 const app = express();
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT;
 const DBURI = "";
 const jsonParser = bodyParser.json()
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -52,7 +52,7 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
     }
 });
-// Init Upload
+// Initialise Upload
 const upload = multer({
     storage: storage,
     limits: {
@@ -66,12 +66,10 @@ const upload = multer({
 const checkFileType = (file, cb) => {
     // allowed axtensions
     const filetypes = /jpeg|png|jpg|gif/;
-    // check ext
+    // authenticating the post
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    // check mime type
     const mimetype = filetypes.test(file.mimetype);
     
-    // checking if all are true
     if (mimetype, extname) {
         return cb(null, true);
     } else {
@@ -126,6 +124,7 @@ app.post("/login", (req, res, next) => {
                         // we will just redirect the user to UHP and get their localStorage data
                         // validate it via our validation route and then give an error or the user data back via server and ejs tags
                         // and we will be good! also our EVERY request from the UHP will require both the username and the password so its secure
+			// again, its a fun project which wont be released so no need to worry about the localstorage security
                         res.redirect("/UserHomePage");
                     } else {
                         res.render("login", {wrongPassword: `Invalid password, please try again!`});
@@ -135,6 +134,7 @@ app.post("/login", (req, res, next) => {
                 };
             }).catch(err => {
                 // this error gives us a console feedback based on the error we get
+		// file - /root/errors/errorOnDBquerry.js
                 errorOnDBquerry(err, `${req.protocol}://${req.get("host")}${req.originalUrl}`);
             });
         } else res.render("login", {passwordNotEntered: "Nice try, but not good enough lol."});
@@ -145,11 +145,10 @@ app.post("/login", (req, res, next) => {
 /**
  *  SIGNUP PAGE
  */
-// the signup page get req
 app.get("/signup", (req, res) => {
     res.render("signup");
 })
-// the signup page post req (NOTE: this is the signup reqest)
+// signup request
 app.post("/signup", (req, res) => {
     // note: dont forget to check if values are undefined too 
     // as some script kiddie is all it takes to remove your page's html elements
